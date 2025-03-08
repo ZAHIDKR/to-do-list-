@@ -256,13 +256,13 @@ button:hover {
 }
 
 .search-card img {
-    width: 260px; /* Default size */
+    width: 260px;
     height: 200px;
     border-radius: 5px;
-    object-fit: contain; /* Ensure the full image is visible */
-    transition: transform 0.3s ease-in-out; /* Smooth scaling */
+    object-fit: contain; 
+    transition: transform 0.3s ease-in-out; 
     cursor: pointer;
-    display: block; /* Prevent inline spacing issues */
+    display: block; 
 }
 
 .search-card img.active {
@@ -278,9 +278,9 @@ button:hover {
 .search-card p {
     color: var(--text-color);
 }
-/* start here  */
+
 #todoList {
-    list-style: none; /* Remove default bullets */
+    list-style: none; 
     padding-left: 0;
 }
 
@@ -306,13 +306,13 @@ button:hover {
 
 /* Stylish Bullet Points */
 #todoList > li::before {
-    content: "🌸"; /* Sakura bullet */
+    content: "🌸"; 
     font-size: 1.2em;
     position: absolute;
-    left: -25px; /* Adjust bullet position */
+    left: -25px; 
 }
 
-/* Ensure text inside li is aligned properly */
+
 #todoList > li > span {
     flex-grow: 1;
     text-align: left;
@@ -322,7 +322,7 @@ button:hover {
 }
 
 #todoList > li {
-    background: rgba(255, 182, 193, 0.3); /* Light pink */
+    background: rgba(255, 182, 193, 0.3); 
     border-left: 5px solid var(--button-bg);
 }
 #nav{
