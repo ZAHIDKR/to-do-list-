@@ -32,7 +32,7 @@ const people = [
     { name: "piyush", image: "/to-do-list-/assets/piyush .jpeg", desc: "mai kho geya hu muje koi ghar le jao !" },
     { name: "shihab", image: "/to-do-list-/assets/shihab.jpeg", desc: "ami akta valo shale keo pem korta chaile call dao !" },
     { name: "afiya malek", image: "/to-do-list-/assets/afia.jpeg", desc: "A beautiful soul with a kind heart!" },
-    { name: "aafiya", image: "/to-do-list-/assets/aafiya.jpeg", desc: "A beautiful soul with a kind heart!" },
+    { name: "aafiya", image: "/to-do-list-/assets/aafiya.jpeg", desc: "mai itni sundar ho to kiya karu mai mar jao? mai single hu kisi ko bhi date karna hai to msg me tumne mari jasi itni sundar ladki aj tak dekha nahi hoga" },
 ];
 
 // Add Item to To-Do List
