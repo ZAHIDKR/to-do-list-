@@ -42,7 +42,16 @@ body {
     left: 20px;
     z-index: 100;
     cursor: pointer;
+    margin-top: 13px;
 }
+
+/* Remove margin-top when screen width is 540px or less */
+@media (max-width: 540px) {
+    .hamburger-menu {
+        margin-top: 0;
+    }
+}
+
 
 .hamburger-menu i {
     font-size: 1.5em;
@@ -246,12 +255,6 @@ button:hover {
     text-align: center;
 }
 
-/* .search-card img { img card
-    width: 260px;
-    height: 200px;
-    border-radius: 5px;
-    object-fit: cover;
-} */
 .search-card img {
     width: 260px; /* Default size */
     height: 200px;
