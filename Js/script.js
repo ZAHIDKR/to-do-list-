@@ -35,25 +35,80 @@ const people = [
     { name: "aafiya", image: "/to-do-list-/assets/aafiya.jpeg", desc: "mai itni sundar ho to kiya karu mai mar jao? mai single hu kisi ko bhi date karna hai to msg me tumne mari jasi itni sundar ladki aj tak dekha nahi hoga" },
 ];
 
+// Load to-do items from localStorage when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadToDoItems();
+    
+    // Load the saved dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Load the saved font size
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+        currentFontSize = parseInt(savedFontSize);
+        updateFontSize();
+    }
+});
+
+// Function to save to-do items to localStorage
+function saveToDoItems() {
+    const items = [];
+    document.querySelectorAll('#todoList li span').forEach(item => {
+        items.push(item.textContent);
+    });
+    localStorage.setItem('todoItems', JSON.stringify(items));
+}
+
+// Function to load to-do items from localStorage
+function loadToDoItems() {
+    const items = JSON.parse(localStorage.getItem('todoItems')) || [];
+    ul.innerHTML = ''; // Clear the list before loading
+    
+    items.forEach(item => {
+        createToDoItem(item);
+    });
+}
+
+// Function to create a to-do item
+function createToDoItem(text) {
+    let li = document.createElement("li");
+    let span = document.createElement("span");
+    let delButton = document.createElement("button");
+
+    span.textContent = text;
+    delButton.textContent = "Delete";
+    delButton.addEventListener("click", () => {
+        ul.removeChild(li);
+        saveToDoItems(); // Save after deleting an item
+    });
+
+    li.appendChild(span);
+    li.appendChild(delButton);
+    ul.appendChild(li);
+}
+
 // Add Item to To-Do List
 addButton.addEventListener("click", () => {
     let currentVal = input.value.trim();
     if (currentVal === "") return;
     input.value = "";
 
-    let li = document.createElement("li");
-    let span = document.createElement("span");
-    let delButton = document.createElement("button");
+    createToDoItem(currentVal);
+    saveToDoItems(); // Save after adding a new item
+});
 
-    span.textContent = currentVal;
-    delButton.textContent = "Delete";
-    delButton.addEventListener("click", () => {
-        ul.removeChild(li);
-    });
+// Allow adding items with Enter key
+input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        let currentVal = input.value.trim();
+        if (currentVal === "") return;
+        input.value = "";
 
-    li.appendChild(span);
-    li.appendChild(delButton);
-    ul.appendChild(li);
+        createToDoItem(currentVal);
+        saveToDoItems(); // Save after adding a new item
+    }
 });
 
 // Search Function
@@ -75,9 +130,16 @@ function showSearchCard(imgSrc, name, desc) {
     searchCard.style.display = "block";
 }
 
-// Dark Mode Toggle
+// Dark Mode Toggle with localStorage
 darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+    
+    // Save dark mode preference
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+    }
 });
 
 // Hamburger Menu Toggle
@@ -89,9 +151,10 @@ closeBtn.addEventListener("click", () => {
     menuSidebar.classList.remove("active");
 });
 
-// Font Size Functions
+// Font Size Functions with localStorage
 function updateFontSize() {
     document.documentElement.style.setProperty('--font-size-base', `${16 * (currentFontSize/100)}px`);
+    localStorage.setItem('fontSize', currentFontSize.toString());
 }
 
 increaseFont.addEventListener("click", () => {
@@ -112,6 +175,7 @@ resetFont.addEventListener("click", () => {
     currentFontSize = 100;
     updateFontSize();
 });
+
 document.addEventListener("DOMContentLoaded", function () {
     const searchImage = document.getElementById("searchImage");
 
@@ -119,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
         searchImage.classList.toggle("active");
     });
 });
+
 // Search Function
 searchButton.addEventListener("click", () => {
     let query = searchInput.value.trim().toLowerCase();
@@ -144,6 +209,7 @@ searchInput.addEventListener("input", () => {
         searchCard.style.display = "none";
     }
 });
+
 // Open Sidebar
 menuIcon.addEventListener("click", () => {
     menuSidebar.classList.add("active");
